@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment / secrets
+.env
+.env.*
+
+# IDE / editor
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Training checkpoints
+data/processed/*checkpoint*.pth
+data/processed/*resume*.pth
+
+# Local trained models and training data
+data/processed/*.pth
+data/rag/qa_dataset_v4.json
