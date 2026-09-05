@@ -564,6 +564,7 @@ This project covers, hands-on:
 ## 👤 Author
 
 **Samuel D**
+
 B.E. Computer Science and Engineering
 
 Prathyusha Engineering College
