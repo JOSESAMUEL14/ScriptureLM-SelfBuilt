@@ -2,41 +2,26 @@
 
 > **A self-built Bible Language Model + Retrieval-Augmented Generation (RAG) system — built from scratch, not from an API.**
 
-`Python` · `PyTorch` · `NumPy` · `Sentence-Transformers` · `Flask` · `Gunicorn` · `Render`
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"/>
+  <img src="https://img.shields.io/badge/PyTorch-Transformer-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" alt="PyTorch"/>
+  <img src="https://img.shields.io/badge/Flask-REST_API-000000?style=for-the-badge&logo=flask&logoColor=white" alt="Flask"/>
+  <img src="https://img.shields.io/badge/Render-Deployed-46E3B7?style=for-the-badge&logo=render&logoColor=white" alt="Render"/>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Model-V4_Causal_Transformer-6E56CF?style=flat-square" alt="Model V4"/>
+  <img src="https://img.shields.io/badge/Params-~5.85M-orange?style=flat-square" alt="Params"/>
+  <img src="https://img.shields.io/badge/Embeddings-all--MiniLM--L6--v2-4E9F3D?style=flat-square" alt="Embeddings"/>
+  <img src="https://img.shields.io/badge/Verses-31%2C102-b3541e?style=flat-square" alt="Verses"/>
+  <img src="https://img.shields.io/badge/License-Unspecified-lightgrey?style=flat-square" alt="License"/>
+</p>
 
 <p align="center">
   <a href="https://scripturelm-selfbuilt.onrender.com"><b>🚀 Live Demo</b></a>
   &nbsp;•&nbsp;
   <a href="https://github.com/JOSESAMUEL14/ScriptureLM-SelfBuilt"><b>💻 GitHub Repository</b></a>
 </p>
-
----
-
-## 📑 Table of Contents
-
-- [About the Project](#-about-the-project)
-- [Key Highlights](#-key-highlights)
-- [System Architecture](#-system-architecture)
-- [Dataset](#-dataset)
-- [Tokenizer](#-tokenizer)
-- [Transformer Model](#-transformer-model)
-- [Training](#-training)
-- [RAG System](#-rag-system)
-- [QA Fine-Tuning](#-qa-fine-tuning)
-- [How the Application Works](#-how-the-application-works)
-- [Web Application](#-web-application)
-- [API](#-api)
-- [Project Structure](#-project-structure)
-- [Technology Stack](#-technology-stack)
-- [Run Locally](#-run-locally)
-- [Deployment](#-deployment)
-- [Example Questions](#-example-questions)
-- [Testing / Validation](#-testing--validation)
-- [Limitations](#-limitations)
-- [Why I Built This](#-why-i-built-this)
-- [Project Status](#-project-status)
-- [Author](#-author)
-- [License](#-license)
 
 ---
 
@@ -510,21 +495,6 @@ gunicorn app:app
 - Retrieval tested on topics such as *love* and *Moses*
 - Best V4 validation loss: `3.85433`
 - Best QA validation answer loss: `2.667409`
-
----
-
-## ⚠️ Limitations
-
-> Being transparent about this project's constraints is part of the point.
-
-- Small Transformer compared with modern LLMs
-- Base-model generation can be unreliable
-- QA fine-tuning has limited free-form reasoning ability
-- Production responses depend heavily on retrieval quality
-- Retrieval depends on the embedding model and how the question is worded
-- The application is grounded strictly in retrieved Bible passages
-- Free Render hosting can have cold starts
-- This is an **educational/experimental** project, not a production theological tool
 
 ---
 
