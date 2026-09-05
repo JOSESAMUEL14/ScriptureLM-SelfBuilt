@@ -1,684 +1,490 @@
-# 🧠 ScriptureLM-SelfBuilt
+<div align="center">
+✝️ SCRIPTURELM-SELFBUILT
+A Self-Built Bible Language Model + Retrieval-Augmented Generation System
+https://img.shields.io/badge/%F0%9F%9A%80_Live_Demo-https://scripturelm--selfbuilt.onrender.com-2ea44f?style=for-the-badge&logo=render&logoColor=white
+https://img.shields.io/badge/%F0%9F%93%82_Repository-View_on_GitHub-181717?style=for-the-badge&logo=github&logoColor=white
 
-### BUILD · TRAIN · RETRIEVE · UNDERSTAND
+https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white
+https://img.shields.io/badge/PyTorch-EE4C2C?logo=pytorch&logoColor=white
+https://img.shields.io/badge/Flask-000000?logo=flask&logoColor=white
+https://img.shields.io/badge/Render-46E3B7?logo=render&logoColor=white
 
-<p align="center">
-  <b>A Self-Built Bible Language Model + Retrieval-Augmented Generation System</b>
-</p>
+</div>
+📜 The Sacred Blueprint
+"Every line of code is a verse. Every token is a word. Every retrieval is a revelation."
 
-<p align="center">
-  PyTorch • Custom BPE • Transformer • RAG • Flask • Render
-</p>
+ScriptureLM-SelfBuilt is an educational, domain-specific NLP project that deconstructs the modern LLM pipeline. Instead of treating AI as a black box, this project builds every component from scratch—from tokenization to transformer training, from semantic search to deployment.
 
-<p align="center">
-  <a href="https://scripturelm-selfbuilt.onrender.com">
-    🌐 <b>LIVE DEMO</b>
-  </a>
-  &nbsp;&nbsp;•&nbsp;&nbsp;
-  <a href="https://github.com/JOSESAMUEL14/ScriptureLM-SelfBuilt">
-    💻 <b>GITHUB</b>
-  </a>
-</p>
+🧬 The Complete Pipeline
 
----
 
-## 📚 Table of Contents
 
-* [About](#-about)
-* [Key Highlights](#-key-highlights)
-* [System Overview](#-system-overview)
-* [Dataset](#-dataset)
-* [Tokenizer](#-tokenizer)
-* [Transformer Model](#-transformer-model)
-* [Training](#-training)
-* [RAG System](#-rag-system)
-* [QA Fine-Tuning](#-qa-fine-tuning)
-* [How It Works](#-how-it-works)
-* [Web Application](#-web-application)
-* [API](#-api)
-* [Project Structure](#-project-structure)
-* [Technology Stack](#-technology-stack)
-* [Run Locally](#-run-locally)
-* [Deployment](#-deployment)
-* [Example Questions](#-example-questions)
-* [Limitations](#-limitations)
-* [Project Status](#-project-status)
-* [Author](#-author)
 
----
 
-## 📖 About
 
-**ScriptureLM-SelfBuilt** is an educational NLP project created to understand how a domain-specific language model and RAG application can be built from the ground up.
 
-The project combines a **custom-trained causal Transformer language model** with a **semantic Bible retrieval system** and a **Flask web application**.
 
-The overall pipeline is:
 
-```text
-Bible Corpus
-      ↓
-Custom BPE Tokenizer
-      ↓
-Tokenized Dataset
-      ↓
-Causal Transformer
-      ↓
-Model Training
-      ↓
-QA Fine-Tuning
-      ↓
-Bible Verse Embeddings
-      ↓
-Semantic Retrieval
-      ↓
-Grounded Answer Builder
-      ↓
-Flask API
-      ↓
-Web Interface
 
-The deployed application retrieves relevant Bible passages and builds the final response from those retrieved passages.
 
-🔒 No external generative AI API is used for the final answer.
 
-⭐ Key Highlights
-Feature	Description
-📚 Bible Corpus	31,102 Bible verses
-🔤 Tokenizer	Custom BPE tokenizer
-🧠 Language Model	Self-built causal Transformer
-🏗️ Transformer Version	V4
-🧮 Model Size	~5.85M parameters
-👁️ Attention Heads	8
-🧱 Transformer Layers	6
-📐 Embedding Dimension	256
-🔎 RAG Embeddings	384 dimensions
-🤖 Embedding Model	all-MiniLM-L6-v2
-📝 QA Dataset	12,000 examples
-🌐 Backend	Flask
-🔌 API	REST API
-❤️ Health Check	/health
-☁️ Deployment	Render
-💰 Hosting	Free
-🏗️ System Overview
 
-ScriptureLM consists of two major pipelines:
 
-                         SCRIPTURELM
-                              │
-             ┌────────────────┴────────────────┐
-             │                                 │
-             ▼                                 ▼
-      LANGUAGE MODEL                       RAG SYSTEM
-             │                                 │
-             ▼                                 ▼
-      Bible Corpus                         Bible Verses
-             │                                 │
-             ▼                                 ▼
-      BPE Tokenizer                       Documents
-             │                                 │
-             ▼                                 ▼
-      Tokenized Dataset              Sentence Embeddings
-             │                                 │
-             ▼                                 ▼
-      Transformer V4                  Semantic Retrieval
-             │                                 │
-             ▼                                 ▼
-         Training                       Top 5 Passages
-             │                                 │
-             └────────────────┬────────────────┘
-                              │
-                              ▼
-                    Grounded Answer Builder
-                              │
-                              ▼
-                         Flask API
-                              │
-                              ▼
-                       Web Interface
+📑 Table of Contents
+📊 Project Dashboard
 
-🧠 Language Model Path: Learn how a Transformer language model is trained on a domain-specific corpus.
+🧠 System Architecture
 
-🔎 RAG Path: Retrieve relevant Scripture passages and use them to ground the application's responses.
+📚 Dataset & Tokenizer
 
-📚 Dataset
+⚙️ Transformer Model
 
-The core Bible corpus is stored in:
+🎯 Training Configuration
 
-data/raw/bible_corpus.txt
-Corpus Statistics
-Property	Value
-Total verses	31,102
+🔍 RAG System
+
+🧪 QA Fine-Tuning
+
+🚀 Application Flow
+
+📡 API Reference
+
+💻 Local Development
+
+🌐 Deployment
+
+⚠️ Limitations
+
+🏆 Project Status
+
+👨‍💻 Author
+
+📊 Project Dashboard
+Category	Specification	Status
+📖 Corpus	31,102 Bible verses, one per line	✅
+✏️ Tokenizer	Custom BPE (2,048 vocab, 1,985 merges)	✅
+🧠 Model	V4 Causal Transformer	✅
+🔢 Parameters	~5.85 Million	✅
+🏗️ Layers	6 Transformer Layers	✅
+🎯 Attention	8 Attention Heads	✅
+📐 Dimensions	256 Embedding, 256 Context	✅
+🔮 RAG Model	all-MiniLM-L6-v2 (384-dim)	✅
+📊 QA Dataset	12,000 examples	✅
+🌐 Web Server	Flask + Gunicorn	✅
+☁️ Deployment	Render (Free Plan)	✅
+💚 Health Check	/health endpoint	✅
+🧠 System Architecture
+Two-Path Design: Generation + Retrieval
+ascii
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                      SCRIPTURELM-SELFBUILT ARCHITECTURE                     ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                            ║
+║   ┌──────────────────────────────┐    ┌─────────────────────────────┐     ║
+║   │     LANGUAGE MODEL PATH       │    │        RAG PATH             │     ║
+║   │                              │    │                             │     ║
+║   │  📖 Bible Corpus            │    │  📄 Document Builder        │     ║
+║   │  (31,102 verses)            │    │  └───► documents.json       │     ║
+║   │         ↓                   │    │                             │     ║
+║   │  ✏️ BPE Tokenizer           │    │  🔮 all-MiniLM-L6-v2       │     ║
+║   │  (Vocab: 2,048)            │    │  └───► embeddings.npy      │     ║
+║   │         ↓                   │    │         (31,102 × 384)     │     ║
+║   │  💾 Tokenized Dataset       │    │                             │     ║
+║   │  (dataset_v4.pt)           │    │  🔍 Retriever              │     ║
+║   │         ↓                   │    │  └───► Top 20 Candidates   │     ║
+║   │  🧠 Transformer V4         │    │                             │     ║
+║   │  (6 Layers, 8 Heads)       │    │  📚 Book Diversity Select   │     ║
+║   │         ↓                   │    │  └───► Top 5 Passages      │     ║
+║   │  🎯 Training (5,000 steps)  │    │                             │     ║
+║   │  └───► Loss: 3.85433       │    │                             │     ║
+║   │         ↓                   │    │                             │     ║
+║   │  🧪 QA Fine-Tuning         │    │                             │     ║
+║   │  (12,000 examples)         │    │                             │     ║
+║   │  └───► Loss: 2.667409      │    │                             │     ║
+║   └──────────────┬───────────────┘    └─────────────┬───────────────┘     ║
+║                  ↓                                  ↓                      ║
+║   ┌──────────────────────────────────────────────────────────────┐         ║
+║   │              GROUNDED ANSWER BUILDER                          │         ║
+║   │  "Blessed are the pure in heart..." ← Context Retrieval     │         ║
+║   └──────────────────────────────────────────────────────────────┘         ║
+║                                    ↓                                       ║
+║                    ┌──────────────────────────┐                           ║
+║                    │   🌐 FLASK API (app.py)   │                           ║
+║                    └──────────────────────────┘                           ║
+║                                    ↓                                       ║
+║                    ┌──────────────────────────┐                           ║
+║                    │  🖥️ WEB INTERFACE        │                           ║
+║                    │  index.html              │                           ║
+║                    └──────────────────────────┘                           ║
+║                                    ↓                                       ║
+║                    ┌──────────────────────────┐                           ║
+║                    │  ❓ Question → 📖 Answer  │                           ║
+║                    │  + 📚 Sources + 📊 Scores │                           ║
+║                    └──────────────────────────┘                           ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+📚 Dataset & Tokenizer
+📖 Bible Corpus
+Attribute	Detail
+File	data/raw/bible_corpus.txt
 Format	One verse per line
-Reference	Book / Chapter / Verse
-Purpose	Transformer training + RAG
-
-Example:
-
-[Book Chapter:Verse] verse text
-
-The corpus is processed into machine-readable training data before being passed to the Transformer.
-
-🔤 Tokenizer
-
-ScriptureLM uses a custom Byte Pair Encoding (BPE) tokenizer.
-
-Configuration
-Setting	Value
+Total Verses	31,102
+Reference Format	Book Chapter:Verse
+<details> <summary><b>📝 Sample Corpus Format</b></summary>
+text
+Genesis 1:1 In the beginning God created the heaven and the earth.
+Genesis 1:2 And the earth was without form, and void; and darkness was upon the face of the deep.
+Psalm 23:1 The LORD is my shepherd; I shall not want.
+John 3:16 For God so loved the world, that he gave his only begotten Son...
+</details>
+✏️ Custom BPE Tokenizer
+Attribute	Value
+Type	Byte Pair Encoding (Custom)
 Vocabulary Size	2,048
 BPE Merges	1,985
+File	data/processed/tokenizer_v4.json
+🎯 Purpose: Converts raw text into token IDs for the Transformer model.
 
-The tokenizer converts Bible text into token IDs that can be processed by the language model.
-
-Raw Bible Text
-      ↓
+ascii
+Text: "In the beginning God created"
+       ↓
 BPE Tokenizer
-      ↓
-Token IDs
-      ↓
-Training Sequences
-
-Tokenizer files are stored in:
-
-data/processed/tokenizer_v4.json
-🧠 Transformer Model
-
-The V4 model is a causal Transformer language model designed specifically for the project Bible corpus.
-
-Model Specifications
-Specification	V4
+       ↓
+Tokens: [147, 832, 512, 104, 27, 1893, 176]
+       ↓
+Vocab Size: 2,048
+⚙️ Transformer Model
+V4 Causal Transformer Specifications
+ascii
+╔═══════════════════════════════════════════════════════╗
+║           V4 TRANSFORMER ARCHITECTURE                ║
+╠═══════════════════════════════════════════════════════╣
+║ ╔═══════════════════════════════════════════════════╗ ║
+║ ║  Input Tokens (Context Length: 256)              ║ ║
+║ ╠═══════════════════════════════════════════════════╣ ║
+║ ║   ↓ Token Embeddings (Dim: 256)                 ║ ║
+║ ║   ↓ Positional Embeddings                       ║ ║
+║ ╠═══════════════════════════════════════════════════╣ ║
+║ ║   ┌───────────────────────────────────────────┐  ║ ║
+║ ║   │  Layer 1                                 │  ║ ║
+║ ║   │  ├── LayerNorm                           │  ║ ║
+║ ║   │  ├── Multi-Head Attention (8 Heads)      │  ║ ║
+║ ║   │  ├── Residual Connection                 │  ║ ║
+║ ║   │  ├── LayerNorm                           │  ║ ║
+║ ║   │  ├── Feed-Forward Network                │  ║ ║
+║ ║   │  └── Residual Connection                 │  ║ ║
+║ ║   └───────────────────────────────────────────┘  ║ ║
+║ ║   ═══════════════════════════════════════════    ║ ║
+║ ║   ┌───────────────────────────────────────────┐  ║ ║
+║ ║   │  Layers 2-6 (Repeat)                     │  ║ ║
+║ ║   │  └── Same Structure                      │  ║ ║
+║ ║   └───────────────────────────────────────────┘  ║ ║
+║ ╠═══════════════════════════════════════════════════╣ ║
+║ ║   ↓ Final LayerNorm                             ║ ║
+║ ║   ↓ Linear Head (Vocab Size: 2,048)            ║ ║
+║ ╠═══════════════════════════════════════════════════╣ ║
+║ ║  Output: Logits → Probabilities                 ║ ║
+║ ╚═══════════════════════════════════════════════════╝ ║
+╚═══════════════════════════════════════════════════════╝
+📊 Model Details Table
+Component	Specification
 Vocabulary Size	2,048
 Context Length	256
 Embedding Dimension	256
 Attention Heads	8
 Transformer Layers	6
 Dropout	0.1
-Parameters	~5.85M
-Model Components
+Total Parameters	~5.85M
+🎯 Training Configuration
+Training Hyperparameters
+Parameter	Value	Parameter	Value
+Batch Size	2	Gradient Accumulation	16
+Effective Batch Size	32	Training Steps	5,000
+Initial LR	3e-4	Final LR	3e-5
+Warmup Steps	300	Optimizer	AdamW
+Weight Decay	0.1	Gradient Clipping	1.0
+Dropout	0.1	Scheduler	Warmup + Cosine Decay
+🏆 Training Results
+ascii
+╔═══════════════════════════════════════════════════════╗
+║              TRAINING METRICS                         ║
+╠═══════════════════════════════════════════════════════╣
+║                                                       ║
+║   Best V4 Validation Loss:   ████████░░ 3.85433      ║
+║                                                       ║
+║   Best QA Answer Loss:       ████████░░ 2.667409     ║
+║                                                       ║
+║   Training Script:           src/train_v4.py          ║
+║   QA Training Script:        src/rag/train_qa_v4.py  ║
+║                                                       ║
+╚═══════════════════════════════════════════════════════╝
+🔍 RAG System
+Retrieval-Augmented Generation Pipeline
+Purpose: Ground answers in actual Bible passages rather than relying solely on the Transformer's generation.
 
-The Transformer contains:
+📋 RAG Components
+Component	File/Location	Details
+Document Builder	src/rag/build_documents.py	Creates verse documents
+Document Output	data/rag/documents.json	31,102 documents
+Embedding Model	all-MiniLM-L6-v2	384-dimensional
+Embedding Shape	data/rag/embeddings.npy	31,102 × 384
+Retriever	src/rag/retriever.py	Semantic search
+🔄 RAG Workflow Diagram
+ascii
+╔═══════════════════════════════════════════════════════════════════════╗
+║                      RAG RETRIEVAL WORKFLOW                           ║
+╚═══════════════════════════════════════════════════════════════════════╝
 
-Token embeddings
-Positional embeddings
-Multi-head self-attention
-Feed-forward networks
-Residual connections
-Pre-normalization
-Layer normalization
-Causal language-model head
-Transformer Flow
-Input Tokens
-      ↓
-Token Embeddings
-      +
-Positional Embeddings
-      ↓
-Transformer Block
-      ↓
-Multi-Head Self-Attention
-      ↓
-Feed-Forward Network
-      ↓
-Residual Connections
-      ↓
-Repeated Across 6 Layers
-      ↓
-Final LayerNorm
-      ↓
-Language Model Head
-      ↓
-Next Token Prediction
-⚙️ Training
+  ❓ USER QUESTION: "What does the Bible say about love?"
+         │
+         ▼
+  🔮 Question → Embedding (384-dim)
+         │
+         ▼
+  📊 Semantic Similarity Search
+      ┌─────────────────────────────┐
+      │  31,102 × 384 Embeddings    │
+      │  Compare Against All Verses  │
+      └─────────────────────────────┘
+         │
+         ▼
+  🏆 Top 20 Candidate Passages
+         │
+         ▼
+  📚 Book Diversity Selection
+      ┌─────────────────────────────┐
+      │  Ensure verses from         │
+      │  different Bible books      │
+      └─────────────────────────────┘
+         │
+         ▼
+  📖 Top 5 Passages Selected
+      ┌─────────────────────────────┐
+      │  1. 1 Corinthians 13:4       │
+      │  2. John 3:16               │
+      │  3. Psalm 23:1              │
+      │  4. Romans 8:38-39          │
+      │  5. 1 John 4:8              │
+      └─────────────────────────────┘
+         │
+         ▼
+  ✨ Grounded Answer Builder
+         │
+         ▼
+  📨 Response: Answer + Sources + Scores
+🧪 QA Fine-Tuning
+Experimental Question-Answering Pipeline
+Purpose: Improve the Transformer's ability to answer Bible-related questions.
 
-The V4 Transformer was trained on the processed Bible dataset.
+📊 QA Dataset Distribution
+ascii
+╔═══════════════════════════════════════════════════════════╗
+║              QA DATASET (12,000 Examples)                 ║
+╠═══════════════════════════════════════════════════════════╣
+║                                                           ║
+║   Training:   ████████████████████████████░░  9,648      ║
+║   Validation: ██████░░░░░░░░░░░░░░░░░░░░░░░░  1,166      ║
+║   Testing:    ██████░░░░░░░░░░░░░░░░░░░░░░░░  1,186      ║
+║                                                           ║
+║   Total:               12,000                            ║
+║                                                           ║
+╚═══════════════════════════════════════════════════════════╝
+🎯 Key Details
+Aspect	Detail
+Loss Masking	Answer-only (ignores question tokens)
+Status	Experimental
+Model Size	Small for QA tasks
+Instruction Tuning	Not applied
+Generation	Limited for free-form answers
+Production Use	Relies on retrieval + grounded builder
+🚀 Application Flow
+Complete User Journey
+ascii
+╔══════════════════════════════════════════════════════════════════════════╗
+║                         APPLICATION FLOW                                 ║
+╚══════════════════════════════════════════════════════════════════════════╝
 
-Training Configuration
-Setting	Value
-Batch Size	2
-Gradient Accumulation	16
-Effective Batch Size	32
-Training Steps	5,000
-Initial Learning Rate	3e-4
-Final Learning Rate	3e-5
-Warmup Steps	300
-Optimizer	AdamW
-Weight Decay	0.1
-Gradient Clipping	1.0
-Dropout	0.1
-Scheduler	Warmup + Cosine Decay
-Training Result
-
-Best recorded V4 validation loss:
-
-3.85433
-
-The training pipeline is implemented in:
-
-src/train_v4.py
-🔎 RAG System
-
-The production application uses Retrieval-Augmented Generation (RAG) to ground responses in Bible passages.
-
-RAG Pipeline
-User Question
-      ↓
-Question Embedding
-      ↓
-Similarity Search
-      ↓
-31,102 Bible Verse Embeddings
-      ↓
-Candidate Passages
-      ↓
-Book Diversity Selection
-      ↓
-Top 5 Relevant Passages
-      ↓
-Grounded Answer Builder
-      ↓
-Final Response
-📦 Document Store
-
-Bible verses are converted into individual documents using:
-
-src/rag/build_documents.py
-
-Output:
-
-data/rag/documents.json
-🧮 Embeddings
-
-The project uses:
-
-all-MiniLM-L6-v2
-
-Each Bible verse is represented by a:
-
-384-dimensional embedding
-
-The complete embedding matrix contains:
-
-31,102 × 384
-
-Stored in:
-
-data/rag/embeddings.npy
-🔍 Retrieval Process
-
-When a user asks a question:
-
-The question is converted into an embedding.
-The embedding is normalized.
-Similarity is calculated against the Bible embeddings.
-Relevant candidate verses are identified.
-Results are diversified across Bible books.
-The top 5 passages are selected.
-Relevant sentences are extracted.
-The grounded response is returned.
-
-The retriever is implemented in:
-
-src/rag/retriever.py
-📝 QA Fine-Tuning
-
-The project also includes an experimental QA fine-tuning pipeline.
-
-Dataset:
-
-data/rag/qa_dataset_v4.json
-Dataset Split
-Split	Examples
-Training	9,648
-Validation	1,166
-Testing	1,186
-Total	12,000
-
-The QA training process uses answer-only loss masking so that the model focuses on learning the answer portion of each training example.
-
-Best Validation Result
-Answer Validation Loss: 2.667409
-QA Pipeline
-Question
-   +
-Retrieved Context
-   ↓
-QA Training Format
-   ↓
-Answer-Only Loss Masking
-   ↓
-Fine-Tuned V4 Model
-
-⚠️ QA is an experimental component.
-Because the Transformer is relatively small and is not instruction-tuned, direct free-form QA generation is limited. The deployed application therefore relies on the retrieval and grounded-answer pipeline.
-
-🔄 How It Works
-
-ScriptureLM follows this process when a user asks a question.
-
-Step 1 — User Question
-"What does the Bible say about love?"
-Step 2 — Semantic Representation
-
-The question is converted into a numerical embedding using:
-
-all-MiniLM-L6-v2
-Step 3 — Bible Retrieval
-
-The embedding is compared with the stored Bible verse embeddings.
-
-Question
-   ↓
-Embedding
-   ↓
-Similarity Search
-   ↓
-Relevant Bible Verses
-Step 4 — Relevance Selection
-
-The system selects the most relevant passages while applying book diversity.
-
-Step 5 — Grounded Answer
-
-Relevant sentences from the retrieved passages are selected and combined into the final response.
-
-Step 6 — Web Response
-
-The Flask API returns:
-
-Answer
-+
-Source Passages
-+
-Similarity Scores
-🌐 Web Application
-
-The web application is built using Flask.
-
-Main application:
-
-app.py
-Application Flow
-Browser
-   ↓
-Flask Web Interface
-   ↓
-/api/ask
-   ↓
-BibleRetriever
-   ↓
-Semantic Search
-   ↓
-Grounded Answer Builder
-   ↓
-JSON Response
-   ↓
-Browser
-🔌 API
+   👤 USER ACTIONS                           🤖 SYSTEM RESPONSES
+────────────────────────────────────────────────────────────────────────────
+   
+   1. Types question                      🔮 Question → Embedding
+      "What does the Bible say              │
+       about forgiveness?"                  ▼
+                                          📊 Search 31,102 verses
+                                            │
+                                            ▼
+                                          📚 Retrieve Top 20
+                                            │
+                                            ▼
+                                          📖 Select 5 Diverse Passages
+                                            │
+   2. Clicks "Ask" ▶────────────────────▶  ✨ Build Grounded Answer
+                                            │
+                                            ▼
+                                          📨 Return JSON Response
+                                            │
+   3. Sees Answer                        ┌────────────────────────┐
+      "Forgive 70×7..."                  │ • Answer               │
+      📚 Sources                         │ • Sources + References │
+      📊 Similarity Scores               │ • Similarity Scores    │
+                                         └────────────────────────┘
+📡 API Reference
 Available Endpoints
-Endpoint	Method	Purpose
-/	GET	Web application
-/api/ask	POST	Ask a Bible question
-/health	GET	Production health check
-💬 Ask Question
-
-Endpoint:
-
-POST /api/ask
-
-Example request:
-
+Endpoint	Method	Description
+/	GET	Serves the web interface
+/api/ask	POST	Submit Bible questions
+/health	GET	Health check endpoint
+📤 POST /api/ask Request
+json
 {
   "question": "What does the Bible say about love?"
 }
-
-Example response:
-
+📥 POST /api/ask Response
+json
 {
   "question": "What does the Bible say about love?",
-  "answer": "...",
+  "answer": "Love is patient, love is kind. It does not envy, it does not boast, it is not proud. It does not dishonor others, it is not self-seeking, it is not easily angered, it keeps no record of wrongs.",
   "sources": [
     {
-      "reference": "...",
-      "text": "...",
-      "score": 0.0
+      "reference": "1 Corinthians 13:4-5",
+      "text": "Love is patient, love is kind. It does not envy, it does not boast, it is not proud. It does not dishonor others, it is not self-seeking, it is not easily angered, it keeps no record of wrongs.",
+      "score": 0.8234
+    },
+    {
+      "reference": "1 John 4:8",
+      "text": "Whoever does not love does not know God, because God is love.",
+      "score": 0.7891
     }
   ]
 }
-❤️ Health Check
-
-Endpoint:
-
-GET /health
-
-Response:
-
+✅ GET /health Response
+json
 {
   "status": "ok"
 }
-
-Production health check:
-
-https://scripturelm-selfbuilt.onrender.com/health
-📁 Project Structure
-ScriptureLM-SelfBuilt/
-│
-├── app.py
-├── README.md
-├── requirements.txt
-├── .python-version
-├── .gitignore
-│
-├── data/
-│   ├── raw/
-│   │   └── bible_corpus.txt
-│   │
-│   ├── processed/
-│   │   ├── dataset_v4.pt
-│   │   └── tokenizer_v4.json
-│   │
-│   └── rag/
-│       ├── documents.json
-│       └── embeddings.npy
-│
-├── src/
-│   ├── dataset_v4.py
-│   ├── generate_v4.py
-│   ├── model_v4.py
-│   ├── tokenizer_v4.py
-│   ├── train_v4.py
-│   │
-│   └── rag/
-│       ├── build_documents.py
-│       ├── build_embeddings.py
-│       ├── build_qa_dataset_v4.py
-│       ├── retriever.py
-│       ├── test_rag_qa_v4.py
-│       └── train_qa_v4.py
-│
-└── ui/
-    ├── static/
-    └── templates/
-        └── index.html
-🛠️ Technology Stack
-Technology	Purpose
-🐍 Python	Core development
-🔥 PyTorch	Transformer implementation and training
-🔢 NumPy	Numerical processing
-🤗 Sentence Transformers	Semantic embeddings
-🔎 all-MiniLM-L6-v2	Bible verse retrieval
-🌐 Flask	Web application + REST API
-⚡ Gunicorn	Production WSGI server
-🎨 HTML/CSS/JavaScript	Frontend
-📦 Git	Version control
-🐙 GitHub	Source repository
-☁️ Render	Cloud deployment
-🚀 Run Locally
-1. Clone the Repository
+💻 Local Development
+Step-by-Step Setup
+bash
+# 1️⃣ Clone the repository
 git clone https://github.com/JOSESAMUEL14/ScriptureLM-SelfBuilt.git
 cd ScriptureLM-SelfBuilt
-2. Create a Virtual Environment
-Windows
+
+# 2️⃣ Create virtual environment
+# Windows:
 python -m venv venv
 venv\Scripts\activate
-3. Install Dependencies
+
+# macOS/Linux:
+python -m venv venv
+source venv/bin/activate
+
+# 3️⃣ Install dependencies
 pip install -r requirements.txt
-4. Start the Application
+
+# 4️⃣ Run the application
 python app.py
-
-The application will be available at:
-
-http://127.0.0.1:5000
-
-Health check:
-
-http://127.0.0.1:5000/health
-☁️ Deployment
-
-ScriptureLM is deployed using Render's free web service.
-
-🌐 Live Application
-https://scripturelm-selfbuilt.onrender.com
-❤️ Health Check
-https://scripturelm-selfbuilt.onrender.com/health
-Build Command
+🌐 Local Access
+Resource	URL
+Web Interface	http://127.0.0.1:5000
+Health Check	http://127.0.0.1:5000/health
+🌐 Deployment
+Render Deployment Details
+Attribute	Value
+Platform	Render
+Plan	Free
+Python Version	3.12
+PyTorch	CPU-only version
+WSGI Server	Gunicorn
+Requirements	Pinned dependencies
+Build & Start Commands
+bash
+# 🔨 Build Command
 pip install -r requirements.txt
-Start Command
+
+# 🚀 Start Command
 gunicorn app:app
-Runtime
-Python 3.12
-CPU-only PyTorch
-Gunicorn
-Flask
+🌍 Live URLs
+Service	URL
+Live Application	https://scripturelm-selfbuilt.onrender.com
+Health Check	https://scripturelm-selfbuilt.onrender.com/health
+📝 Example Questions
+Try these questions to test the system:
 
-The production dependencies are pinned in:
+❓ "What does the Bible say about love?"
 
-requirements.txt
+❓ "Who was Moses?"
 
-This helps keep the deployment environment predictable.
+❓ "What does the Bible say about faith?"
 
-💬 Example Questions
+❓ "What does the Bible say about forgiveness?"
 
-Try ScriptureLM with questions such as:
-
-What does the Bible say about love?
-Who was Moses?
-What does the Bible say about faith?
-What does the Bible say about forgiveness?
-What does the Bible say about hope?
-
-The application retrieves relevant Bible passages and constructs a grounded response from those passages.
-
-🧪 Validation & Testing
-
-The project includes dedicated RAG testing:
-
-src/rag/test_rag_qa_v4.py
-
-Example retrieval topics tested during development include:
-
-Love
-Moses
-Faith
-
-The retrieval system successfully identifies relevant Bible passages from the 31,102-verse corpus.
+❓ "What does the Bible say about hope?"
 
 ⚠️ Limitations
+Honest Technical Assessment
+Area	Limitation
+Model Size	Small Transformer (~5.85M params) vs. modern LLMs
+Generation	Base-model generation can be unreliable
+Reasoning	QA fine-tuning has limited free-form reasoning
+Retrieval Quality	Depends on embedding model and question phrasing
+Grounded Output	Strictly bound to retrieved Bible passages
+Hosting	Free Render plan may have cold starts
+Purpose	Educational/experimental, not production-ready
+💡 Note: This project prioritizes learning over performance. It demonstrates the full LLM pipeline rather than achieving state-of-the-art results.
 
-ScriptureLM is an educational and experimental NLP project.
-
-Current limitations
-The Transformer is small compared with modern LLMs.
-Base-model text generation can be unreliable.
-The QA fine-tuned model has limited free-form reasoning ability.
-Production responses depend on retrieval quality.
-Retrieval quality depends on the embedding model and question wording.
-The application does not perform broad theological reasoning beyond its retrieved source passages.
-Free Render hosting can introduce cold-start delays after inactivity.
-
-ScriptureLM should be considered a language-model and Bible retrieval experiment, not a replacement for authoritative Bible study resources or theological scholarship.
-
-🎯 What This Project Demonstrates
-
-The main purpose of this project was to understand the components behind modern LLM applications rather than simply consume an existing chatbot API.
-
-The project covers:
-
-📚 Dataset Preparation
-       ↓
-🔤 Tokenization
-       ↓
-🧩 BPE
-       ↓
-🧠 Transformer Architecture
-       ↓
-👁️ Self-Attention
-       ↓
-⚙️ Model Training
-       ↓
-📝 Fine-Tuning
-       ↓
-📐 Embeddings
-       ↓
-🔎 Semantic Search
-       ↓
-📦 RAG
-       ↓
-🔌 REST API
-       ↓
-🌐 Flask
-       ↓
-☁️ Cloud Deployment
-📊 Project Status
-🟢 COMPLETED & DEPLOYED
-Component	Status
-Bible Corpus	✅ Completed
-BPE Tokenizer	✅ Completed
-Transformer V4	✅ Completed
-V4 Training	✅ Completed
-QA Dataset	✅ Completed
-QA Fine-Tuning	✅ Completed
-Bible Documents	✅ Completed
-Semantic Embeddings	✅ Completed
-RAG Retrieval	✅ Completed
-Grounded Answer Builder	✅ Completed
-Flask Application	✅ Completed
-REST API	✅ Completed
-Health Check	✅ Completed
-Render Deployment	✅ Completed
-GitHub Repository	✅ Completed
-Documentation	✅ Completed
-🌐 Live Project
-🚀 ScriptureLM
-
-https://scripturelm-selfbuilt.onrender.com
-
-💻 Source Code
-
-https://github.com/JOSESAMUEL14/ScriptureLM-SelfBuilt
-
-❤️ Health Check
-
-https://scripturelm-selfbuilt.onrender.com/health
+🏆 Project Status
+Development Progress
+ascii
+╔══════════════════════════════════════════════════════════════════════════╗
+║                         COMPLETED MILESTONES                            ║
+╠══════════════════════════════════════════════════════════════════════════╣
+║                                                                          ║
+║  📖 Bible Corpus              ████████████████████████░  31,102 verses  ║
+║  ✏️ BPE Tokenizer             ████████████████████████░  Vocab: 2,048   ║
+║  🧠 Transformer V4            ████████████████████████░  6 Layers        ║
+║  🎯 V4 Training               ████████████████████████░  Loss: 3.85433  ║
+║  📊 QA Dataset                ████████████████████████░  12,000 examples║
+║  🧪 QA Fine-Tuning            ████████████████████████░  Loss: 2.667409 ║
+║  📄 Bible Documents           ████████████████████████░  31,102 docs    ║
+║  🔮 Semantic Embeddings       ████████████████████████░  31,102 × 384   ║
+║  🔍 RAG Retrieval             ████████████████████████░  Top 5 Passages ║
+║  ✨ Grounded Answer Builder   ████████████████████████░  Answer + Sources║
+║  🌐 Flask Application         ████████████████████████░  app.py         ║
+║  📡 REST API                  ████████████████████████░  /api/ask       ║
+║  💚 Health Check              ████████████████████████░  /health        ║
+║  ☁️ Render Deployment         ████████████████████████░  Live           ║
+║  📂 GitHub Repository         ████████████████████████░  Public         ║
+║  📝 Documentation             ████████████████████████░  Complete       ║
+║                                                                          ║
+╚══════════════════════════════════════════════════════════════════════════╝
+Overall Progress: ✅ 16/16 (100% Complete)
 
 👨‍💻 Author
 Samuel D
+🎓 B.E. Computer Science and Engineering
+🏫 Prathyusha Engineering College
+📅 Graduating 2027
 
-B.E. Computer Science and Engineering
-Prathyusha Engineering College
-Graduating 2027
-
-GitHub
-
-https://github.com/JOSESAMUEL14
-
-<p align="center">
-✝️ Scripture · 🧠 Intelligence · 🔎 Retrieval · 💻 From Scratch
-
-Built from Scripture.
+Connect
+Platform	Link
+GitHub	github.com/JOSESAMUEL14
+Live Demo	scripturelm-selfbuilt.onrender.com
+📖 The Vision
+<div align="center">
+Scripture · Intelligence · Retrieval · From Scratch
+"Built from Scripture.
 Built to understand LLMs.
-Built from scratch.
+Built from scratch."
 
-</p>
-📄 License
+This project is a testament to the journey of learning—
+Every component, every line of code, every verse is a step toward mastery.
 
+</div>
+📜 License
 No license has been specified for this repository.
+
+<div align="center">
+Made with ☕, 📖, and a deep curiosity for how language models truly work.
+
+⬆ Back to Top
+
+</div>
