@@ -1,6 +1,6 @@
 Flask
 sentence-transformers
-torch==2.3.1+cpu
+torch==2.5.1+cpu
 numpy
 gunicorn
 --extra-index-url https://download.pytorch.org/whl/cpu 
