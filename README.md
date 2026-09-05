@@ -1,6 +1,7 @@
 # 📖 ScriptureLM-SelfBuilt
 
-> **A self-built Bible Language Model + Retrieval-Augmented Generation (RAG) system — built from scratch, not from an API.**
+> **A self-built Bible Language Model + Retrieval-Augmented Generation (RAG) system.**
+> The Transformer language model was implemented and trained from scratch, while a pretrained embedding model is used for semantic retrieval.
 
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"/>
@@ -29,15 +30,19 @@
 
 **ScriptureLM-SelfBuilt** is an educational, domain-specific NLP project that explores building an entire language-model pipeline **from the ground up** — no shortcuts, no pretrained generative APIs for the final answer.
 
-The project walks the full path a modern NLP system takes, applied to the Bible as a text corpus:
+The project is really two related pipelines, applied to the Bible as a text corpus:
 
+**1. Model development pipeline**
 ```
-Bible Corpus → BPE Tokenizer → Tokenized Dataset → Transformer → Training
-   → QA Fine-Tuning → Embeddings → RAG → Grounded Answer Builder
-   → Flask → Web Interface
+Bible Corpus → BPE Tokenizer → Dataset → Transformer → Training → QA Fine-Tuning
 ```
 
-> **Note:** No external generative AI API (e.g. OpenAI, Gemini, Claude) is used to produce the final answer. The production answer is built entirely from **retrieval + grounding logic** over a self-built pipeline.
+**2. Production application pipeline**
+```
+User Question → Embedding → RAG Retrieval → Grounded Answer Builder → Flask → Web UI
+```
+
+> **Note:** No external generative AI API (e.g. OpenAI, Gemini, Claude) is used to produce the final answer. The production answer is built entirely from **retrieval + grounding logic**, using a pretrained embedding model for search over passages drawn from the self-built pipeline above.
 
 ---
 
@@ -56,42 +61,55 @@ Bible Corpus → BPE Tokenizer → Tokenized Dataset → Transformer → Trainin
 | 🔎 RAG Embeddings | 384-dimensional (`all-MiniLM-L6-v2`) |
 | ❓ QA Examples | 12,000 |
 | 🌐 Serving | Flask + REST API |
-| ❤️ Health Check | Production-ready `/health` endpoint |
+| ❤️ Health Check | `/health` health-check endpoint for production deployment |
 | ☁️ Hosting | Render — free tier |
 
 ---
 
 ## 🏗 System Architecture
 
+**Production request path (what actually runs when a user asks a question):**
+
 ```
-                         ┌─────────────────────┐
-                         │     User Question    │
-                         └──────────┬───────────┘
-                                    │
-                     ┌──────────────┴───────────────┐
-                     │                               │
-             ┌───────▼────────┐             ┌────────▼────────┐
-             │  Language Model │             │    RAG Path      │
-             │  (Self-Built     │             │ (Embeddings +    │
-             │   Transformer)   │             │  Retrieval)      │
-             └───────┬────────┘             └────────┬────────┘
-                     │                               │
-                     └───────────────┬───────────────┘
-                                     │
-                          ┌──────────▼───────────┐
-                          │ Grounded Answer Builder│
-                          └──────────┬───────────┘
-                                     │
-                             ┌───────▼────────┐
-                             │   Flask API     │
-                             └───────┬────────┘
-                                     │
-                             ┌───────▼────────┐
-                             │  Web Interface  │
-                             └────────────────┘
+┌─────────────────────┐
+│     User Question    │
+└──────────┬───────────┘
+           │
+┌──────────▼───────────┐
+│  all-MiniLM-L6-v2     │   (pretrained embedding model)
+│  Question Embedding   │
+└──────────┬───────────┘
+           │
+┌──────────▼───────────┐
+│  Semantic Retrieval   │
+│  (31,102 × 384 index) │
+└──────────┬───────────┘
+           │
+┌──────────▼───────────┐
+│  Book Diversity +     │
+│  Top 5 Passages       │
+└──────────┬───────────┘
+           │
+┌──────────▼───────────┐
+│ Grounded Answer Builder│
+└──────────┬───────────┘
+           │
+┌──────────▼───────────┐
+│      Flask API        │
+└──────────┬───────────┘
+           │
+┌──────────▼───────────┐
+│    Web Interface       │
+└────────────────────────┘
 ```
 
-> 💡 The self-built Transformer and the RAG retrieval path are **two distinct components**. Production answers are grounded using retrieval — not free-form generation from the small Transformer.
+**Offline model-development path (built and trained separately, not called at request time):**
+
+```
+Bible Corpus → BPE Tokenizer → Dataset → Self-Built Transformer (V4) → Training → QA Fine-Tuning
+```
+
+> 💡 The self-built Transformer is a **model-development artifact** — it was trained and evaluated separately. It is not invoked in the live production request path above; production answers are grounded using retrieval with the pretrained `all-MiniLM-L6-v2` embedding model.
 
 ---
 
@@ -99,14 +117,14 @@ Bible Corpus → BPE Tokenizer → Tokenized Dataset → Transformer → Trainin
 
 - **Location:** `data/raw/bible_corpus.txt`
 - **Size:** 31,102 verses
-- **Format:** One verse per line, with Book/Chapter/Verse references
+- **Format:** One verse per line, in `[Book Chapter:Verse] verse text` format
 
 **Example corpus format:**
 
 ```
-Genesis 1:1  In the beginning God created the heaven and the earth.
-Genesis 1:2  And the earth was without form, and void...
-John 3:16    For God so loved the world, that he gave his only begotten Son...
+[Genesis 1:1] In the beginning God created the heaven and the earth.
+[Genesis 1:2] And the earth was without form, and void...
+[John 3:16] For God so loved the world, that he gave his only begotten Son...
 ```
 
 ---
@@ -323,7 +341,7 @@ Because of these limitations, **production answers rely on retrieval + grounded 
 |---|---|---|
 | `GET` | `/` | Serves the web interface |
 | `POST` | `/api/ask` | Accepts a question, returns a grounded answer with sources |
-| `GET` | `/health` | Production health check |
+| `GET` | `/health` | Health-check endpoint for production deployment |
 
 **Example request — `POST /api/ask`:**
 
@@ -333,17 +351,17 @@ Because of these limitations, **production answers rely on retrieval + grounded 
 }
 ```
 
-**Example response:**
+**Example response structure** *(illustrative — actual values depend on the live retrieval result)*:
 
 ```json
 {
   "question": "What does the Bible say about love?",
-  "answer": "Love is patient, love is kind...",
+  "answer": "...",
   "sources": [
     {
-      "reference": "1 Corinthians 13:4",
-      "text": "Love suffereth long, and is kind...",
-      "score": 0.87
+      "reference": "...",
+      "text": "...",
+      "score": 0.0
     }
   ]
 }
