@@ -1,4 +1,4 @@
-# ✝️ ScriptureLM — Self-Built Bible Language Model
+# ScriptureLM — Self-Built Bible Language Model
 
 <p align="center">
   <b>A self-built Language Model + RAG system for exploring the Bible.</b>
