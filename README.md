@@ -1,6 +1,6 @@
 📖 ScriptureLM-SelfBuilt
-https://img.shields.io/badge/%F0%9F%9A%80_Live_Demo-https://scripturelm--selfbuilt.onrender.com-2ea44f?style=flat-square&logo=render&logoColor=white
-https://img.shields.io/badge/%F0%9F%93%82_Repository-View_on_GitHub-181717?style=flat-square&logo=github&logoColor=white
+https://img.shields.io/badge/Live_Demo-https://scripturelm--selfbuilt.onrender.com-2ea44f?style=flat-square&logo=render&logoColor=white
+https://img.shields.io/badge/Repository-View_on_GitHub-181717?style=flat-square&logo=github&logoColor=white
 https://img.shields.io/badge/Python-3.12-3776AB?style=flat-square&logo=python&logoColor=white
 https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white
 https://img.shields.io/badge/Flask-000000?style=flat-square&logo=flask&logoColor=white
@@ -43,7 +43,7 @@ Limitations
 
 Author
 
-📖 About The Project
+About The Project
 ScriptureLM-SelfBuilt is an educational NLP project created to understand the complete workflow of building a domain-specific language model and a retrieval-based question-answering application from the ground up.
 
 Core Pipeline
@@ -53,7 +53,7 @@ Model Training → QA Fine-Tuning → Bible Verse Embeddings → Semantic Retrie
 Grounded Answer Builder → Flask API → Web Interface
 ⚠️ Important: The deployed application does not use an external generative AI API for the final answer. The production response is built using retrieved Bible passages and a deterministic grounded answer builder.
 
-🧠 System Architecture
+System Architecture
 Two-Path Design: Generation + Retrieval
 text
 ┌────────────────────────────────────────────────────────────────────────────┐
@@ -105,7 +105,7 @@ text
 │                     │  + 📊 Scores    │                                  │
 │                     └──────────────────┘                                  │
 └────────────────────────────────────────────────────────────────────────────┘
-📚 Dataset & Tokenizer
+Dataset & Tokenizer
 Bible Corpus
 Attribute	Value
 File	data/raw/bible_corpus.txt
@@ -134,7 +134,7 @@ BPE Tokenizer
 Tokens: [147, 832, 512, 104, 27, 1893, 176]
        ↓
 Vocab Size: 2,048
-⚙️ Transformer Model
+Transformer Model
 V4 Causal Transformer Specifications
 Component	Specification
 Model Version	V4
@@ -178,7 +178,7 @@ Final LayerNorm
 Linear Head (Vocab Size: 2,048)
          ↓
 Output: Logits → Probabilities → Next Token Prediction
-🎯 Training Configuration
+Training Configuration
 Training Hyperparameters
 Parameter	Value	Parameter	Value
 Batch Size	2	Gradient Accumulation	16
@@ -191,7 +191,7 @@ Training Results
 Metric	Value
 Best V4 Validation Loss	3.85433
 Training Script	src/train_v4.py
-🔍 RAG System
+RAG System
 Retrieval-Augmented Generation
 Purpose: Retrieve relevant Bible passages for user questions and use those passages to build grounded responses.
 
@@ -260,7 +260,7 @@ text
          │
          ▼
 📨 Response: Answer + Sources + Scores
-🧪 QA Fine-Tuning
+QA Fine-Tuning
 Experimental Question-Answering Pipeline
 Purpose: Improve the Transformer's ability to answer Bible-related questions. This is an experimental component.
 
@@ -278,7 +278,7 @@ Best Validation Answer Loss	2.667409
 Status	Experimental
 ⚠️ QA Limitation: The Transformer is relatively small compared with modern large language models and is not instruction-tuned. Direct free-form QA generation is therefore limited. The deployed application relies on retrieval and grounded answer building for production responses.
 
-🔄 How It Works
+How It Works
 Complete User Journey
 text
 👤 USER ACTIONS                           🤖 SYSTEM RESPONSES
@@ -305,7 +305,7 @@ text
    📚 Sources                         │ • Sources + References │
    📊 Similarity Scores               │ • Similarity Scores    │
                                        └────────────────────────┘
-📡 API Reference
+API Reference
 Available Endpoints
 Endpoint	Method	Description
 /	GET	Web application interface
@@ -339,7 +339,7 @@ json
 {
   "status": "ok"
 }
-🚀 Quick Start
+Quick Start
 Prerequisites
 Python 3.12
 
@@ -371,7 +371,7 @@ Local Access
 Resource	URL
 Web Interface	http://127.0.0.1:5000
 Health Check	http://127.0.0.1:5000/health
-📁 Project Structure
+Project Structure
 text
 ScriptureLM-SelfBuilt/
 │
@@ -412,7 +412,7 @@ ScriptureLM-SelfBuilt/
     ├── static/
     └── templates/
         └── index.html
-🛠️ Technology Stack
+Technology Stack
 Tool	Purpose
 Python	Core programming language
 PyTorch	Transformer implementation and model training
@@ -425,7 +425,7 @@ HTML / CSS / JavaScript	Frontend
 Git	Version control
 GitHub	Source-code repository
 Render	Cloud deployment
-🌐 Deployment
+Deployment
 Render Deployment Details
 Attribute	Value
 Platform	Render
@@ -444,7 +444,7 @@ Live URLs
 Service	URL
 Live Application	https://scripturelm-selfbuilt.onrender.com
 Health Check	https://scripturelm-selfbuilt.onrender.com/health
-📝 Example Questions
+Example Questions
 Try these questions to test the system:
 
 ❓ "What does the Bible say about love?"
@@ -457,13 +457,13 @@ Try these questions to test the system:
 
 ❓ "What does the Bible say about hope?"
 
-🧪 Testing
+Testing
 Aspect	Detail
 RAG Testing Script	src/rag/test_rag_qa_v4.py
 Tested Topics	Love, Moses
 Best V4 Validation Loss	3.85433
 Best QA Validation Answer Loss	2.667409
-⚠️ Limitations
+Limitations
 Area	Limitation
 Model Size	Small Transformer compared with modern large language models
 Generation	Base-model text generation can be unreliable
@@ -474,7 +474,7 @@ Hosting	Free Render hosting can experience cold starts after inactivity
 Purpose	Educational and experimental language-model and Bible retrieval system
 💡 Note: This project prioritizes learning over performance. It demonstrates the full LLM pipeline rather than achieving state-of-the-art results.
 
-🎯 Learning Areas
+Learning Areas
 This project provided hands-on experience with:
 
 Area	Component
@@ -484,7 +484,7 @@ Model Development	Causal language modeling, Training, Fine-tuning
 Information Retrieval	Semantic search, Retrieval-Augmented Generation
 Web Development	REST APIs, Flask, Frontend
 DevOps	Git, GitHub, Cloud deployment, Health checks
-📖 Project Status
+Project Status
 Component	Status
 Bible Corpus Preparation	✅ Completed
 Custom BPE Tokenizer	✅ Completed
@@ -501,7 +501,7 @@ REST API	✅ Completed
 Production Health Check	✅ Completed
 Render Deployment	✅ Completed
 GitHub Repository	✅ Completed
-👨‍💻 Author
+Author
 Samuel D
 
 🎓 B.E. Computer Science and Engineering, Prathyusha Engineering College, Graduating 2027
@@ -510,12 +510,12 @@ Samuel D
 
 🌐 Live Demo: https://scripturelm-selfbuilt.onrender.com
 
-📖 The Vision
+The Vision
 "Built from Scripture.
 Built to understand LLMs.
 Built from scratch."
 
-📝 License
+License
 No license has been specified for this repository.
 
 <div align="center">
