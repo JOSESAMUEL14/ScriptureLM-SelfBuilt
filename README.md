@@ -565,7 +565,9 @@ This project covers, hands-on:
 
 **Samuel D**
 B.E. Computer Science and Engineering
+
 Prathyusha Engineering College
+
 Graduating 2027
 
 GitHub: [github.com/JOSESAMUEL14](https://github.com/JOSESAMUEL14)
@@ -578,8 +580,7 @@ GitHub: [github.com/JOSESAMUEL14](https://github.com/JOSESAMUEL14)
 
 *"Built from Scripture.*
 *Built to understand LLMs.*
-*Built from scratch."*
-
+*Built with a self-trained Transformer."*
 </div>
 
 ---
