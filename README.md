@@ -1,260 +1,392 @@
-# ScriptureLM — Self-Built Bible Language Model
+ScriptureLM-SelfBuilt
 
-<p align="center">
-  <b>A self-built Language Model + RAG system for exploring the Bible.</b>
-</p>
+A self-built Bible Language Model + Retrieval-Augmented Generation (RAG) system
 
-<p align="center">
-  <a href="https://scripturelm-selfbuilt.onrender.com">
-    🌐 <b>LIVE DEMO</b>
-  </a>
-  &nbsp; • &nbsp;
-  <a href="https://github.com/JOSESAMUEL14/ScriptureLM-SelfBuilt">
-    💻 <b>GITHUB</b>
-  </a>
-</p>
+Live Demo · GitHub Repository
 
----
+📖 Overview
 
-## 🌐 Try ScriptureLM
+ScriptureLM-SelfBuilt is an educational NLP project built to understand the complete workflow behind a domain-specific language model.
 
-> **Ask a question. Retrieve relevant Scripture. Get a grounded response.**
+The project combines a custom-trained Transformer language model with a semantic Bible retrieval system and a Flask web application.
 
-### 🚀 Live Application
+The complete pipeline
 
-**https://scripturelm-selfbuilt.onrender.com**
-
-### 💻 Source Code
-
-**https://github.com/JOSESAMUEL14/ScriptureLM-SelfBuilt**
-
----
-
-## 🧠 What is ScriptureLM?
-
-**ScriptureLM-SelfBuilt** is an experimental Bible-focused language-model project built to understand how modern NLP systems work from the ground up.
-
-Instead of simply connecting an existing chatbot API, this project explores the complete pipeline:
-
-```text
 Bible Corpus
      ↓
-Custom BPE Tokenizer
+BPE Tokenizer
      ↓
 Tokenized Dataset
      ↓
 Transformer Language Model
      ↓
-Model Training
+Training
      ↓
 QA Fine-Tuning
      ↓
-Semantic Embeddings
+Bible Verse Embeddings
      ↓
-RAG Retrieval
+Semantic Retrieval
      ↓
 Grounded Answer Builder
      ↓
-Flask Web Application
+Flask API
+     ↓
+Web Interface
 
-The deployed application uses retrieval-grounded Bible passages to construct its answers.
+The deployed application answers questions using retrieved Bible passages.
 
-🚫 No external generative AI API is used to generate the final answer.
+No external generative AI API is used for the final answer.
 
-✨ Project Highlights
-Component	Implementation
-📚 Bible Corpus	31,102 verses
-🔤 Tokenizer	Custom BPE
-🧠 Language Model	Self-built Causal Transformer
-🧩 Vocabulary	2,048 tokens
-🏗️ Transformer Layers	6
-👁️ Attention Heads	8
-📐 Embedding Size	256
-🧮 Model Size	~5.85M parameters
-🔎 RAG Embeddings	384 dimensions
-🤖 Embedding Model	all-MiniLM-L6-v2
-🌐 Backend	Flask
-🚀 Deployment	Render
-💰 Hosting Cost	$0
-🏗️ How It Works
-1️⃣ Build the Language Model
+✨ Key Features
 
-The Bible corpus is converted into tokens using a custom BPE tokenizer.
+📚 31,102 Bible verses used as the core corpus
 
-Bible Text
-    ↓
-BPE Tokenizer
-    ↓
-Token IDs
-    ↓
-Training Blocks
-    ↓
-Transformer
+🔤 Custom Byte Pair Encoding (BPE) tokenizer
 
-The V4 Transformer contains:
+🧠 Self-built causal Transformer language model
 
-6 Transformer layers
-8 attention heads
-256-dimensional embeddings
-256-token context window
-Causal self-attention
-Feed-forward networks
-Residual connections
-Layer normalization
-Dropout
-🔎 2️⃣ Retrieval-Augmented Generation
+🏗️ V4 model with approximately 5.85M parameters
 
-The deployed application uses a separate retrieval pipeline to ground responses in Scripture.
+🔎 Semantic Bible verse retrieval
 
-User Question
-      ↓
-Question Embedding
-      ↓
-Semantic Similarity Search
-      ↓
-31,102 Bible Verses
-      ↓
-Top Relevant Passages
-      ↓
-Relevance Filtering
-      ↓
-Grounded Answer
-Retrieval Engine
+📐 384-dimensional sentence embeddings
 
-Each Bible verse is represented as a 384-dimensional embedding.
+📝 Experimental QA fine-tuning pipeline
 
-The system uses:
+🌐 Flask-based web application
 
-all-MiniLM-L6-v2
+🔌 REST API for Bible questions
 
-The embeddings are normalized and compared using similarity scoring.
+❤️ Production health-check endpoint
 
-The retriever:
+🚀 Deployed on Render
 
-Converts the question into an embedding.
-Searches the Bible embedding matrix.
-Finds relevant candidate verses.
-Applies diversity across Bible books.
-Selects the top 5 passages.
-Passes them to the grounded answer builder.
-📝 3️⃣ QA Fine-Tuning
+💰 Hosted using the free Render plan
 
-The project also includes an experimental QA fine-tuning pipeline.
+🏗️ System Architecture
 
-Dataset
-12,000 QA examples
-
-Split:
-
-Training     → 9,648
-Validation   → 1,166
-Testing      → 1,186
-
-The training process uses answer-only loss masking, allowing the model to focus its learning on the answer portion.
-
-Best recorded validation answer loss:
-
-2.667409
-Why is QA marked experimental?
-
-The Transformer is intentionally small compared with modern large language models and is not instruction-tuned like ChatGPT-style models.
-
-Therefore, the production application relies on retrieval + deterministic grounding rather than depending on free-form generated answers.
-
-🧩 System Architecture
                          SCRIPTURELM
                               │
-          ┌───────────────────┴───────────────────┐
-          │                                       │
-          ▼                                       ▼
-   LANGUAGE MODEL PATH                     RAG PATH
-          │                                       │
-          ▼                                       ▼
-   Bible Corpus                            Bible Verses
-          │                                       │
-          ▼                                       ▼
-    BPE Tokenizer                         Documents
-          │                                       │
-          ▼                                       ▼
-   Tokenized Dataset                  Sentence Embeddings
-          │                                       │
-          ▼                                       ▼
-   Transformer V4                    Semantic Retrieval
-          │                                       │
-          ▼                                       ▼
-      Training                            Top 5 Passages
-          │                                       │
-          └───────────────────┬───────────────────┘
+              ┌───────────────┴───────────────┐
+              │                               │
+              ▼                               ▼
+       LANGUAGE MODEL                       RAG SYSTEM
+              │                               │
+              ▼                               ▼
+       Bible Corpus                      Bible Verses
+              │                               │
+              ▼                               ▼
+       BPE Tokenizer                     Documents
+              │                               │
+              ▼                               ▼
+      Tokenized Dataset              Sentence Embeddings
+              │                               │
+              ▼                               ▼
+       Transformer V4                 Semantic Retrieval
+              │                               │
+              ▼                               ▼
+           Training                     Top 5 Passages
+              │                               │
+              └───────────────┬───────────────┘
                               │
                               ▼
                      Grounded Answer
                               │
                               ▼
-                        Flask API
+                         Flask API
                               │
                               ▼
                        Web Interface
-🧠 Transformer Configuration
-Parameter	V4
-Vocabulary Size	2,048
-Context Length	256
-Embedding Dimension	256
-Attention Heads	8
-Transformer Layers	6
-Dropout	0.1
-Parameters	~5.85M
-Training Configuration
-Batch Size             : 2
-Gradient Accumulation  : 16
-Effective Batch Size   : 32
-Training Steps         : 5,000
-Initial Learning Rate  : 3e-4
-Final Learning Rate    : 3e-5
-Warmup Steps           : 300
-Optimizer              : AdamW
-Weight Decay           : 0.1
-Gradient Clipping      : 1.0
-Scheduler              : Warmup + Cosine Decay
 
-Best recorded V4 validation loss:
+🧠 Transformer Model
 
-3.85433
-📚 Dataset
+The V4 model is a causal Transformer language model trained specifically on the project Bible corpus.
 
-The Bible corpus is stored at:
+Model Configuration
 
-data/raw/bible_corpus.txt
-Corpus Statistics
-Total verses : 31,102
-Format       : One verse per line
-References   : Book / Chapter / Verse
+Parameter
 
-Example:
+Value
 
-[Book Chapter:Verse] verse text
+Vocabulary Size
+
+2,048
+
+Context Length
+
+256
+
+Embedding Dimension
+
+256
+
+Attention Heads
+
+8
+
+Transformer Layers
+
+6
+
+Dropout
+
+0.1
+
+Parameters
+
+~5.85M
+
+Main Components
+
+Token embeddings
+
+Positional embeddings
+
+Multi-head self-attention
+
+Feed-forward networks
+
+Residual connections
+
+Pre-normalization
+
+Final LayerNorm
+
+Causal language-model head
+
 🔤 Custom BPE Tokenizer
 
 ScriptureLM uses a custom Byte Pair Encoding tokenizer.
 
-Vocabulary Size : 2,048
-BPE Merges      : 1,985
+Setting
 
-The tokenizer converts raw Bible text into token IDs that can be consumed by the Transformer.
+Value
+
+Vocabulary Size
+
+2,048
+
+BPE Merges
+
+1,985
+
+The tokenizer converts Bible text into token IDs that can be processed by the Transformer.
+
+📚 Bible Corpus
+
+The main corpus is stored in:
+
+data/raw/bible_corpus.txt
+
+Corpus
+
+Property
+
+Value
+
+Total verses
+
+31,102
+
+Format
+
+One verse per line
+
+Reference format
+
+Book / Chapter / Verse
+
+Example:
+
+[Book Chapter:Verse] verse text
+
+🔎 Retrieval-Augmented Generation
+
+The production application uses RAG to ground responses in Bible passages.
+
+Retrieval Flow
+
+User Question
+      ↓
+Question Embedding
+      ↓
+Similarity Search
+      ↓
+Bible Embedding Matrix
+      ↓
+Candidate Passages
+      ↓
+Book Diversity Selection
+      ↓
+Top 5 Results
+      ↓
+Grounded Answer Builder
+      ↓
+Response
+
+Embedding System
+
+The project uses:
+
+all-MiniLM-L6-v2
+
+Each Bible verse is represented by a 384-dimensional embedding.
+
+Generated embeddings are stored in:
+
+data/rag/embeddings.npy
+
+Bible documents are stored in:
+
+data/rag/documents.json
+
+The retriever normalizes embeddings and uses similarity scoring to identify relevant passages.
+
+📝 QA Fine-Tuning
+
+The project also contains an experimental QA fine-tuning pipeline.
+
+Dataset:
+
+data/rag/qa_dataset_v4.json
+
+Dataset Split
+
+Split
+
+Examples
+
+Training
+
+9,648
+
+Validation
+
+1,166
+
+Testing
+
+1,186
+
+Total
+
+12,000
+
+The training process uses answer-only loss masking, allowing the model to focus on the answer portion of each example.
+
+Best recorded validation answer loss:
+
+2.667409
+
+Why is the QA system experimental?
+
+The Transformer is intentionally small compared with modern large language models and is not instruction-tuned.
+
+Because of this, direct free-form QA generation is limited.
+
+The deployed application therefore relies on the retrieval + grounded answer pipeline for its responses.
+
+⚙️ Training Configuration
+
+The V4 language model was trained using:
+
+Setting
+
+Value
+
+Batch Size
+
+2
+
+Gradient Accumulation
+
+16
+
+Effective Batch Size
+
+32
+
+Training Steps
+
+5,000
+
+Initial Learning Rate
+
+3e-4
+
+Final Learning Rate
+
+3e-5
+
+Warmup Steps
+
+300
+
+Optimizer
+
+AdamW
+
+Weight Decay
+
+0.1
+
+Gradient Clipping
+
+1.0
+
+Dropout
+
+0.1
+
+Scheduler
+
+Warmup + Cosine Decay
+
+Best recorded V4 validation loss:
+
+3.85433
 
 🌐 Web Application
 
-The web application is built using Flask.
+The Flask application is located in:
+
+app.py
 
 API Endpoints
-Endpoint	Method	Description
-/	GET	ScriptureLM web interface
-/api/ask	POST	Ask a Bible question
-/health	GET	Production health check
+
+Endpoint
+
+Method
+
+Purpose
+
+/
+
+GET
+
+Web interface
+
+/api/ask
+
+POST
+
+Ask a Bible question
+
+/health
+
+GET
+
+Production health check
+
 Example Request
+
 {
   "question": "What does the Bible say about love?"
 }
-Example Response
+
+Response
+
 {
   "question": "What does the Bible say about love?",
   "answer": "...",
@@ -266,10 +398,13 @@ Example Response
     }
   ]
 }
-🗂️ Project Structure
+
+📁 Project Structure
+
 ScriptureLM-SelfBuilt/
 │
 ├── app.py
+├── README.md
 ├── requirements.txt
 ├── .python-version
 ├── .gitignore
@@ -305,36 +440,27 @@ ScriptureLM-SelfBuilt/
     ├── static/
     └── templates/
         └── index.html
-⚙️ Training Configuration
 
-The V4 language model was trained with:
-
-Batch size: 2
-Gradient accumulation: 16
-Effective batch size: 32
-Training steps: 5,000
-Learning rate: 3e-4 → 3e-5
-Warmup steps: 300
-Optimizer: AdamW
-Weight decay: 0.1
-Gradient clipping: 1.0
-Dropout: 0.1
-Learning-rate schedule: Warmup + Cosine Decay
-
-Best recorded V4 validation loss:
-
-3.85433
 🚀 Run Locally
-1. Clone the Repository
+
+1. Clone the repository
+
 git clone https://github.com/JOSESAMUEL14/ScriptureLM-SelfBuilt.git
 cd ScriptureLM-SelfBuilt
-2. Create a Virtual Environment
-Windows
+
+2. Create a virtual environment
+
+Windows:
+
 python -m venv venv
 venv\Scripts\activate
-3. Install Dependencies
+
+3. Install dependencies
+
 pip install -r requirements.txt
-4. Start ScriptureLM
+
+4. Start the application
+
 python app.py
 
 Open the application:
@@ -344,137 +470,207 @@ http://127.0.0.1:5000
 Health check:
 
 http://127.0.0.1:5000/health
-☁️ Production Deployment
 
-ScriptureLM is deployed using Render's free web service.
+☁️ Deployment
 
-🌐 Production Application
+The application is deployed on Render using the free web service.
+
+Production URL
+
 https://scripturelm-selfbuilt.onrender.com
-❤️ Production Health Check
+
+Production Health Check
+
 https://scripturelm-selfbuilt.onrender.com/health
+
 Build Command
+
 pip install -r requirements.txt
+
 Start Command
+
 gunicorn app:app
 
-The project uses:
+Runtime
 
 Python 3.12
 CPU-only PyTorch
 Gunicorn
 Flask
 
-This keeps the deployment suitable for free CPU hosting.
+The dependency versions are pinned in requirements.txt for more predictable deployment.
 
-💬 Try Asking ScriptureLM
+💬 Example Questions
 
-Some example questions:
+Try questions such as:
 
 What does the Bible say about love?
+
 Who was Moses?
+
 What does the Bible say about faith?
+
 What does the Bible say about forgiveness?
 
-The system retrieves relevant Scripture passages and builds a grounded response from them.
+The system retrieves relevant Bible passages and constructs a grounded response from those passages.
 
 ⚠️ Limitations
 
-ScriptureLM is primarily an educational and experimental NLP project.
+ScriptureLM is an educational and experimental NLP project.
 
 Current limitations include:
 
 The Transformer is small compared with modern LLMs.
+
 Base-model text generation can be unreliable.
+
 QA fine-tuning has limited free-form reasoning capability.
-The production answer system depends heavily on retrieval quality.
-Semantic retrieval depends on the embedding model and wording of the query.
-The free Render deployment can experience cold starts after inactivity.
 
-The system should be treated as a Bible retrieval and language-model experiment, not as a replacement for authoritative Bible study resources or theological scholarship.
+Production responses depend on retrieval quality.
 
-🎯 Why I Built This
+Retrieval quality depends on the embedding model and question wording.
 
-The main goal of ScriptureLM was not simply to build a Bible chatbot.
+The free Render service can experience cold starts after inactivity.
 
-It was to understand how an LLM-based system is actually constructed.
+The project is intended as a language-model and Bible retrieval experiment, not as a replacement for authoritative Bible study resources or theological scholarship.
 
-Through this project, I worked with:
+🎯 What This Project Demonstrates
 
-NLP
- ↓
-Tokenization
- ↓
-BPE
- ↓
-Embeddings
- ↓
-Self-Attention
- ↓
+This project was built to gain practical experience with:
+
+Natural Language Processing
+
+BPE tokenization
+
+Token embeddings
+
+Positional embeddings
+
+Self-attention
+
 Transformers
- ↓
-Language Model Training
- ↓
-Fine-Tuning
- ↓
-Semantic Search
- ↓
-RAG
- ↓
-REST API
- ↓
-Flask
- ↓
-Cloud Deployment
+
+Causal language modeling
+
+Model training
+
+Fine-tuning
+
+Sentence embeddings
+
+Semantic search
+
+Retrieval-Augmented Generation
+
+Flask REST APIs
+
+Git and GitHub
+
+Cloud deployment
+
+Production health checks
+
 🛠️ Technology Stack
-Technology	Purpose
-Python	Core development
-PyTorch	Transformer model and training
-NumPy	Numerical processing
-Sentence Transformers	Semantic embeddings
-all-MiniLM-L6-v2	Retrieval embeddings
-Flask	Web application and REST API
-Gunicorn	Production WSGI server
-HTML/CSS/JavaScript	Frontend
-Git	Version control
-GitHub	Source repository
-Render	Free cloud deployment
+
+Technology
+
+Role
+
+Python
+
+Core development
+
+PyTorch
+
+Transformer model and training
+
+NumPy
+
+Numerical processing
+
+Sentence Transformers
+
+Embedding generation
+
+all-MiniLM-L6-v2
+
+Semantic retrieval
+
+Flask
+
+Web application and REST API
+
+Gunicorn
+
+Production WSGI server
+
+HTML / CSS / JavaScript
+
+Frontend
+
+Git
+
+Version control
+
+GitHub
+
+Source repository
+
+Render
+
+Cloud deployment
+
 📊 Project Status
-🟢 Completed
- Bible corpus preparation
- Custom BPE tokenizer
- Transformer V4 implementation
- V4 model training
- QA dataset creation
- QA fine-tuning
- Bible document generation
- Semantic embeddings
- RAG retrieval
- Grounded answer generation
- Flask API
- Web interface
- Production deployment
- Production health check
- GitHub repository
- Professional documentation
+
+🟢 Completed and Deployed
+
+Bible corpus preparation
+
+Custom BPE tokenizer
+
+Transformer V4 implementation
+
+V4 model training
+
+QA dataset creation
+
+QA fine-tuning
+
+Bible document generation
+
+Semantic embeddings
+
+RAG retrieval
+
+Grounded answer builder
+
+Flask API
+
+Web interface
+
+Render deployment
+
+Production health check
+
+GitHub repository
+
+Project documentation
+
 👨‍💻 Author
+
 Samuel D
 
 B.E. Computer Science and Engineering
 Prathyusha Engineering College
 Graduating 2027
 
-GitHub
-
+GitHub:
 https://github.com/JOSESAMUEL14
 
 <p align="center">
-✝️ Built from Scripture.
-🧠 Built to understand LLMs.
-💻 Built from scratch.
+  <b>✝️ Scripture</b> · <b>🧠 Language Models</b> · <b>🔎 Retrieval</b> · <b>💻 From Scratch</b>
 </p>
+
 📄 License
 
 No license has been specified for this repository.
-
-
-**This is the version I recommend using.** It is ready to paste directly into `README.md` wi
