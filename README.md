@@ -561,7 +561,7 @@ This project covers, hands-on:
 
 ---
 
-## 👤 Author
+## 🧑‍💻 Author
 
 **Samuel D**
 
